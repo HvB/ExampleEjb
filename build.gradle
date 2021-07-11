@@ -1,0 +1,23 @@
+apply plugin: 'java'
+apply plugin: 'eclipse-wtp'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compileOnly  group: 'jakarta.platform', name: 'jakarta.jakartaee-api', version: '8.0.0'
+}
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(8)
+    }
+
+// eclipse facet configuration
+eclipse.wtp.facet { 
+    facet name: 'jst.ejb', version: '3.2'
+ }
+// workaround for "jst.utility" and "jst.ejb" facet incompatibility
+//eclipse.wtp.facet.file.whenMerged { it.facets = it.facets.findAll { it.name != 'jst.utility' }}
+ 
